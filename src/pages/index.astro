@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImmersiveExperience from '../components/ImmersiveExperience.astro';
+import Tagline from '../components/Tagline.astro';
+import Benefits from '../components/Benefits.astro';
+import Process from '../components/Process.astro';
+import ServingIdeas from '../components/ServingIdeas.astro';
+import FAQ from '../components/FAQ.astro';
+import OrderSection from '../components/OrderSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../config/site';
+---
+<BaseLayout>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: site.name,
+      ...(site.url ? { url: site.url } : {}),
+      inLanguage: 'es-CL',
+    })} />
+  </Fragment>
+  <ImmersiveExperience />
+  <main id="contenido">
+    <Tagline />
+    <Benefits />
+    <Process />
+    <ServingIdeas />
+    <FAQ />
+    <OrderSection />
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+const faqs = [
+  {
+    question: '¿Qué son los microgreens?',
+    answer: 'Son plántulas comestibles cosechadas poco después de desarrollar sus cotiledones y primeras hojas. En esta página hablamos de brotes de girasol.',
+  },
+  {
+    question: '¿En qué se diferencian de los germinados?',
+    answer: 'Los germinados se comen en una etapa más temprana, a menudo con la semilla y la raíz. Los microgreens crecen hasta mostrar hojas jóvenes y se cortan para consumir sus tallos y hojas.',
+  },
+  {
+    question: '¿Cómo se comen?',
+    answer: 'Puedes agregarlos a ensaladas, sándwiches, bowls, tostadas o platos preparados. Sigue siempre las indicaciones del envase.',
+  },
+  {
+    question: '¿Necesitan cocción?',
+    answer: 'No necesariamente. Se pueden servir frescos como terminación; también puedes incorporarlos a preparaciones tibias al momento de servir.',
+  },
+  {
+    question: '¿Cómo los conservo?',
+    answer: 'Mantenlos refrigerados y sigue las indicaciones del envase. Los microgreens cosechados pueden perder calidad con rapidez, por eso conviene consumirlos pronto.',
+  },
+  {
+    question: '¿Qué aportan nutricionalmente?',
+    answer: 'El perfil nutricional depende de la especie y de las condiciones de cultivo. Pueden aportar vitaminas, minerales y otros compuestos vegetales, pero esta página no atribuye efectos médicos ni cantidades específicas al producto.',
+  },
+  {
+    question: '¿Dónde puedo comprarlos?',
+    answer: 'La disponibilidad, el precio y las opciones de entrega todavía no están publicados. Cuando el canal comercial esté configurado, aquí aparecerá la forma de hacer tu pedido.',
+  },
+];
+---
+<section class="faq section-shell" id="preguntas" aria-labelledby="faq-title">
+  <div class="faq__intro reveal">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2 id="faq-title">Lo esencial antes de probarlos.</h2>
+  </div>
+  <div class="faq__list">
+    {faqs.map((faq) => (
+      <details class="faq-item reveal" name="microgreens-faq">
+        <summary><span>{faq.question}</span><span class="faq-item__icon" aria-hidden="true">+</span></summary>
+        <p>{faq.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+})} />

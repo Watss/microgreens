@@ -1,0 +1,107 @@
+---
+import { scenes } from '../config/scenes';
+const activeScenes = scenes.filter((scene) => scene.enabled);
+const firstScene = activeScenes[0];
+---
+<section class="immersive" aria-label="Cultivo y cosecha de microgreens" id="inicio">
+  <h1 class="sr-only">Microgreens de girasol: pequeños brotes, grandes posibilidades</h1>
+  <div id="scroll-world" class="scroll-world" aria-label="Recorrido cinematográfico">
+    <div class="world-fallback">
+      <img
+        class="world-fallback__image"
+        src={firstScene.poster}
+        alt="Vista en miniatura de bandejas con brotes de girasol durante su cultivo"
+        fetchpriority="high"
+        width="2560"
+        height="1440"
+      />
+      <div class="world-fallback__copy">
+        <span class="eyebrow">Cultivamos pequeños comienzos</span>
+        <p class="world-fallback__headline">Pequeños brotes.<br />Grandes posibilidades.</p>
+        <p>Microgreens de girasol para sumar sabor, textura y color a tus comidas.</p>
+        <a class="button button--dark" href="#pedido">Quiero probarlos <span aria-hidden="true">↗</span></a>
+        <p class="world-fallback__proof">Dos escenas reales: cultivo y cosecha</p>
+      </div>
+      <span class="world-fallback__scroll" aria-hidden="true">Desplázate para descubrir <span>↓</span></span>
+    </div>
+    <p class="sr-only" id="world-status" aria-live="polite"></p>
+  </div>
+</section>
+
+<script>
+  import { mountScrollWorld } from '../lib/scrub-engine.js';
+  import { scenes } from '../config/scenes';
+  import { site } from '../config/site';
+
+  const root = document.querySelector<HTMLElement>('#scroll-world');
+  const status = document.querySelector<HTMLElement>('#world-status');
+
+  async function fileExists(path: string) {
+    try {
+      const response = await fetch(path, { method: 'HEAD', cache: 'force-cache' });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  if (root) {
+    const isSmallScreen = window.matchMedia('(max-width: 860px)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const configuredScenes = await Promise.all(
+      scenes.filter((scene) => scene.enabled).map(async (scene) => ({
+        scene,
+        videoAvailable: await fileExists(scene.video),
+        posterAvailable: await fileExists(scene.poster),
+      })),
+    );
+    const availableScenes = configuredScenes
+      .filter(({ posterAvailable }) => posterAvailable)
+      .map(({ scene, videoAvailable }) => ({ scene, videoAvailable }));
+
+    if (availableScenes.length) {
+      const fallback = root.querySelector<HTMLElement>('.world-fallback');
+      const scrollCleanup = mountScrollWorld(root, {
+        brand: { name: site.name, href: '#inicio' },
+        cta: { label: 'Pedir microgreens', href: '#pedido' },
+        hint: 'Desliza para descubrir',
+        diveScroll: 1.15,
+        crossfade: 0.22,
+        nav: true,
+        atmosphere: false,
+        mobileStaticFallback: true,
+        directCrossfade: true,
+        releaseAfterScenes: true,
+        releaseScroll: 0.18,
+        tailScroll: 0.22,
+        sections: availableScenes.map(({ scene, videoAvailable }) => ({
+          id: scene.id,
+          label: scene.label,
+          still: scene.poster,
+          clip: videoAvailable && !isSmallScreen && !reduceMotion ? scene.video : undefined,
+          accent: scene.accent,
+          eyebrow: scene.eyebrow,
+          title: scene.title,
+          body: scene.description,
+          tags: scene.tags,
+          scroll: scene.id === 'cultivo' ? 1.3 : 1.45,
+          linger: scene.id === 'cultivo' ? 0.18 : 0.28,
+          cta: scene.id === 'cultivo'
+            ? { primary: { label: 'Quiero probarlos', href: '#pedido' } }
+            : undefined,
+        })),
+        connectors: [],
+      });
+
+      fallback?.setAttribute('hidden', '');
+      status && (status.textContent = isSmallScreen
+        ? 'Recorrido listo. En esta pantalla se muestran fotogramas para cuidar el encuadre y el uso de datos.'
+        : 'Recorrido listo. Desplázate para controlar el video.');
+      window.addEventListener('pagehide', (event) => {
+        if (!event.persisted) scrollCleanup?.();
+      }, { once: true });
+    } else {
+      status && (status.textContent = 'El recorrido está en modo estático porque no se encontraron sus archivos.');
+    }
+  }
+</script>

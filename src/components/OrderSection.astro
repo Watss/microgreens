@@ -1,0 +1,23 @@
+---
+import { store } from '../config/site';
+const channelReady = Boolean(store.whatsappNumber || store.email);
+---
+<section class="order-section section-shell" id="pedido" aria-labelledby="order-title" data-order-section>
+  <div class="order-section__copy reveal">
+    <p class="eyebrow">Una idea fresca para tu mesa</p>
+    <h2 id="order-title">Una forma fresca de transformar tus comidas.</h2>
+    <p>Cuéntanos qué te gustaría saber y te ayudaremos a dar el próximo paso.</p>
+    {!channelReady && <p class="order-section__notice">El canal de pedidos aún no está configurado. Puedes preparar tu mensaje aquí y enviarlo cuando tengas el contacto.</p>}
+  </div>
+  <form class="order-form reveal" data-order-form data-whatsapp={store.whatsappNumber} data-email={store.email} data-product={store.productName}>
+    <label for="order-name">Tu nombre <span>(opcional)</span></label>
+    <input id="order-name" name="name" autocomplete="name" maxlength="80" placeholder="¿Cómo te llamas?" />
+    <label for="order-question">¿Qué te gustaría consultar?</label>
+    <textarea id="order-question" name="question" rows="3" maxlength="300" placeholder="Por ejemplo, dónde comprar o cómo conservarlos"></textarea>
+    <button class="button button--light" type="submit" data-order-button>{channelReady ? 'Contactar para mi pedido' : 'Copiar solicitud'} <span aria-hidden="true">↗</span></button>
+    <p class="order-form__status" data-order-status role="status" aria-live="polite">{channelReady ? 'Se abrirá el canal de contacto configurado.' : 'No se envían datos desde este sitio.'}</p>
+  </form>
+</section>
+<script>
+  import '../scripts/order-form.js';
+</script>

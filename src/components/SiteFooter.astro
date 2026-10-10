@@ -1,0 +1,14 @@
+---
+import { site } from '../config/site';
+---
+<footer class="site-footer section-shell">
+  <a class="site-footer__brand" href="#inicio" aria-label={`${site.name}, volver al inicio`}>
+    <img src="/images/vireya-lockup.svg" alt="" width="208" height="58" />
+  </a>
+  <p>Microgreens de girasol para todos los días.</p>
+  <nav aria-label="Enlaces legales">
+    <a href="/privacidad/">Privacidad</a>
+    <a href="/condiciones/">Condiciones</a>
+  </nav>
+  <span class="site-footer__copy">© {new Date().getFullYear()} {site.name}</span>
+</footer>
