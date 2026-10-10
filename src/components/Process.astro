@@ -1,3 +1,6 @@
+---
+import { withBase } from '../config/site';
+---
 <section class="process section-shell" id="origen" aria-labelledby="process-title">
   <div class="process__intro reveal">
     <p class="eyebrow">De la cosecha a tu mesa</p>
@@ -7,12 +10,12 @@
   <ol class="process__timeline">
     <li class="process-step process-step--visual reveal">
       <span class="process-step__number">01</span>
-      <img src="/images/cultivo-detalle.webp" alt="Bandejas de microgreens de girasol bajo el cuidado de un pequeño agricultor" loading="lazy" width="1280" height="720" />
+      <img src={withBase('/images/cultivo-detalle.webp')} alt="Bandejas de microgreens de girasol bajo el cuidado de un pequeño agricultor" loading="lazy" width="1280" height="720" />
       <div><h3>Cultivo</h3><p>Riego y cuidado en sus primeras etapas.</p></div>
     </li>
     <li class="process-step process-step--visual reveal">
       <span class="process-step__number">02</span>
-      <img src="/images/cosecha-detalle.webp" alt="Cosecha manual de brotes de girasol en una bandeja" loading="lazy" width="1280" height="720" />
+      <img src={withBase('/images/cosecha-detalle.webp')} alt="Cosecha manual de brotes de girasol en una bandeja" loading="lazy" width="1280" height="720" />
       <div><h3>Cosecha</h3><p>Hojas jóvenes listas para disfrutarse frescas.</p></div>
     </li>
     <li class="process-step process-step--future reveal">

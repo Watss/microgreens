@@ -8,7 +8,7 @@ import ServingIdeas from '../components/ServingIdeas.astro';
 import FAQ from '../components/FAQ.astro';
 import OrderSection from '../components/OrderSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { site } from '../config/site';
+import { site, withBase } from '../config/site';
 ---
 <BaseLayout>
   <Fragment slot="head">
@@ -16,7 +16,7 @@ import { site } from '../config/site';
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: site.name,
-      ...(site.url ? { url: site.url } : {}),
+      ...(site.url ? { url: new URL(withBase('/'), site.url).toString() } : {}),
       inLanguage: 'es-CL',
     })} />
   </Fragment>

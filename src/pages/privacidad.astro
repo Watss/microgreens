@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../config/site';
 ---
 <BaseLayout title="Privacidad | Vireya Microgreens" noindex>
   <main class="legal-page section-shell" id="contenido">
@@ -7,6 +8,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>Una página transparente.</h1>
     <p>Esta versión del sitio no incluye analítica, cookies publicitarias ni un sistema de pedidos. El formulario prepara un mensaje en tu dispositivo y, si hay un canal configurado, abre WhatsApp o tu aplicación de correo. El sitio no recibe ni almacena lo que escribes.</p>
     <p>Antes de habilitar un canal comercial, pagos, analítica o formularios conectados, esta página debe actualizarse para explicar qué datos se recopilan, con qué finalidad y cómo ejercer tus derechos conforme a la normativa aplicable en Chile.</p>
-    <a class="text-link" href="/">Volver al inicio <span aria-hidden="true">↗</span></a>
+    <a class="text-link" href={withBase('/')}>Volver al inicio <span aria-hidden="true">↗</span></a>
   </main>
 </BaseLayout>

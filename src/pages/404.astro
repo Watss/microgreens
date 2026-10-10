@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../config/site';
 ---
 <BaseLayout title="No encontramos esa página | Vireya Microgreens" noindex>
   <main class="not-found section-shell" id="contenido">
     <p class="eyebrow">404 · Página no encontrada</p>
     <h1>Este brote tomó otro camino.</h1>
     <p>La dirección puede haber cambiado. Vuelve al inicio para descubrir los microgreens.</p>
-    <a class="button button--dark" href="/">Volver al inicio <span aria-hidden="true">↗</span></a>
+    <a class="button button--dark" href={withBase('/')}>Volver al inicio <span aria-hidden="true">↗</span></a>
   </main>
 </BaseLayout>

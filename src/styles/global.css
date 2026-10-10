@@ -246,7 +246,7 @@ h3 {
   width: 184px !important;
   height: 52px !important;
   border-radius: 0 !important;
-  background: url('/images/vireya-lockup.svg') center / contain no-repeat !important;
+  background: var(--vireya-lockup) center / contain no-repeat !important;
   box-shadow: none !important;
 }
 

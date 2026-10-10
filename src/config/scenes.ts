@@ -1,3 +1,5 @@
+import { withBase } from './site';
+
 export type Scene = {
   id: string;
   label: string;
@@ -17,8 +19,8 @@ export const scenes: Scene[] = [
   {
     id: 'cultivo',
     label: 'Cultivo',
-    video: '/videos/microgreens-test.mp4',
-    poster: '/images/cultivo-poster.webp',
+    video: withBase('/videos/microgreens-test.mp4'),
+    poster: withBase('/images/cultivo-poster.webp'),
     title: 'Pequeños brotes.\nGrandes posibilidades.',
     eyebrow: 'Cultivamos pequeños comienzos',
     description:
@@ -31,8 +33,8 @@ export const scenes: Scene[] = [
   {
     id: 'cosecha',
     label: 'Cosecha',
-    video: '/videos/microgreens-02-cosecha.mp4',
-    poster: '/images/cosecha-poster.webp',
+    video: withBase('/videos/microgreens-02-cosecha.mp4'),
+    poster: withBase('/images/cosecha-poster.webp'),
     title: 'Cosechados en\nsu mejor momento.',
     eyebrow: 'Frescura desde el origen',
     description:
@@ -45,8 +47,8 @@ export const scenes: Scene[] = [
   {
     id: 'seleccion',
     label: 'Selección',
-    video: '/videos/microgreens-03-seleccion.mp4',
-    poster: '/images/microgreens-03-seleccion.webp',
+    video: withBase('/videos/microgreens-03-seleccion.mp4'),
+    poster: withBase('/images/microgreens-03-seleccion.webp'),
     title: 'Una selección cuidadosa.',
     eyebrow: 'Próxima escena',
     description: 'La escena de selección se incorporará cuando el video esté disponible.',
@@ -56,8 +58,8 @@ export const scenes: Scene[] = [
   {
     id: 'empaque',
     label: 'Empaque',
-    video: '/videos/microgreens-04-empaque.mp4',
-    poster: '/images/microgreens-04-empaque.webp',
+    video: withBase('/videos/microgreens-04-empaque.mp4'),
+    poster: withBase('/images/microgreens-04-empaque.webp'),
     title: 'Listos para llegar a tu mesa.',
     eyebrow: 'Próxima escena',
     description: 'La escena de empaque se incorporará cuando el video esté disponible.',
